@@ -31,8 +31,8 @@ public class TargetIcon : MonoBehaviour
         }
 
         Vector3 screenPosition = Camera.main.WorldToScreenPoint(this.transform.position + displayOffset);
-        iconObject.transform.position = screenPosition;
-        if(iconObject.transform.position.z < 0)
+        Debug.Log(iconObject.transform.position);
+        if (iconObject.transform.position.z < 0)
         {
             iconObject.GetComponent<Image>().color = new Color(1, 1, 1, 0);
         }
@@ -40,6 +40,9 @@ public class TargetIcon : MonoBehaviour
         {
             iconObject.GetComponent<Image>().color = Color.white;
         }
+        screenPosition = new Vector3(Mathf.Clamp(screenPosition.x, 10, Screen.width - 10), Mathf.Clamp(screenPosition.y, 10, Screen.height - 10), 0);
+        iconObject.transform.position = screenPosition;
+        
     }
     private void OnDisable()
     {
