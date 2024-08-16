@@ -10,6 +10,7 @@ public class PauseManager : MonoBehaviour
     private bool gamePaused = false;
     [SerializeField] private ThirdPersonController player;
     [SerializeField] private Transform targetPos;
+    [SerializeField] private GameObject targetIcon;
 
     [SerializeField] private GameObject resumeButton;
     [SerializeField] private GameObject quitButton;
@@ -18,6 +19,7 @@ public class PauseManager : MonoBehaviour
     {
         if (!gamePaused)
         {
+            //Pauses game
             if (Input.GetKeyDown(KeyCode.Escape) && FindObjectOfType<TerminalGame>().gameStarted == false)
             {
                 player.enabled = false;
@@ -26,6 +28,8 @@ public class PauseManager : MonoBehaviour
                 resumeButton.SetActive(true);
                 quitButton.SetActive(true);
                 Cursor.lockState = CursorLockMode.None;
+                targetIcon = GameObject.FindGameObjectWithTag("targIcon");
+                targetIcon.SetActive(false);
             }
         }
         else
@@ -47,7 +51,7 @@ public class PauseManager : MonoBehaviour
         resumeButton.SetActive(false);
         quitButton.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
-
+        targetIcon.SetActive(true);
     }
 
     public void Menu()

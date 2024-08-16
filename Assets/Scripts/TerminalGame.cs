@@ -58,12 +58,14 @@ public class TerminalGame : MonoBehaviour
             text.text = question + "\n\n" + answer;
         }
 
+        //starts game
         if(gameStarted)
         {
             Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, cameraPos.position, Time.deltaTime * 2);
             Camera.main.transform.rotation = Quaternion.Lerp(Camera.main.transform.rotation, cameraPos.rotation, Time.deltaTime * 2);
+            
 
-            if(Input.GetKeyDown(KeyCode.Return) && !math)
+            if (Input.GetKeyDown(KeyCode.Return) && !math)
             {
                 jukebox.clip = scaryMusic;
                 jukebox.Play();
@@ -81,6 +83,8 @@ public class TerminalGame : MonoBehaviour
             Camera.main.GetComponent<CinemachineBrain>().enabled = false;
             gameStarted = true;
             FindFirstObjectByType<CharacterController>().gameObject.SetActive(false);
+            GameObject temp = GameObject.FindGameObjectWithTag("targIcon");
+            temp.SetActive(false);
         }
     }
 

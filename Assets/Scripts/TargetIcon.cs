@@ -31,16 +31,18 @@ public class TargetIcon : MonoBehaviour
         }
 
         Vector3 screenPosition = Camera.main.WorldToScreenPoint(this.transform.position + displayOffset);
-        Debug.Log(iconObject.transform.position);
-        if (iconObject.transform.position.z < 0)
+        //fixes issue where the icon mirrors when facing opposite direction
+        if (screenPosition.z < 0)
         {
             iconObject.GetComponent<Image>().color = new Color(1, 1, 1, 0);
         }
         else
         {
             iconObject.GetComponent<Image>().color = Color.white;
+            
         }
         screenPosition = new Vector3(Mathf.Clamp(screenPosition.x, 10, Screen.width - 10), Mathf.Clamp(screenPosition.y, 10, Screen.height - 10), 0);
+
         iconObject.transform.position = screenPosition;
         
     }
