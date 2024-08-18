@@ -15,7 +15,7 @@ public class SpeedDisplay : MonoBehaviour
         slider = GetComponentInChildren<Slider>();
     }
 
-    // Update is called once per frame
+    // sets the value of the slider to the speed of the player
     void Update()
     {
         slider.value = player._speed;

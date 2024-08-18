@@ -33,16 +33,19 @@ public class TerminalGame : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //runs when the player has clicked enter, instructing them with a math prompt
         if (math)
         {
-            answer += Input.inputString;
+            answer += Input.inputString; // takes in user input and stores in a string
 
+            // \b is the character for backspace, nullifies string if it has been clicked
             if (answer.Contains("\b"))
             {
                 answer = null;
                 Instantiate(clearSound);
             }
 
+            //checks the answer is a number, and if it is, check if it is the answer
             if(Int32.TryParse(answer, out int num))
             {
                 if(num == num1 + num2)
@@ -55,16 +58,19 @@ public class TerminalGame : MonoBehaviour
                     return;
                 }
             }
+
+            //display question text and player answer text
             text.text = question + "\n\n" + answer;
         }
 
-        //starts game
+        //runs when player has entered the collision zone
         if(gameStarted)
         {
+            //moves camera towards world space pc UI
             Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, cameraPos.position, Time.deltaTime * 2);
             Camera.main.transform.rotation = Quaternion.Lerp(Camera.main.transform.rotation, cameraPos.rotation, Time.deltaTime * 2);
             
-
+            //starts game when player presses enter, plays horror music and sets text on screen to the random numbers
             if (Input.GetKeyDown(KeyCode.Return) && !math)
             {
                 jukebox.clip = scaryMusic;
@@ -76,6 +82,7 @@ public class TerminalGame : MonoBehaviour
         }
     }
 
+    //disables player movement when the player enters the pc collision zone
     private void OnTriggerEnter(Collider other)
     {
         if (other.transform.tag == "Player")
@@ -88,6 +95,7 @@ public class TerminalGame : MonoBehaviour
         }
     }
 
+    //waits 4 seconds between player winning and being brought back to title screen
     IEnumerator WaitAMo()
     {
         yield return new WaitForSeconds(4);

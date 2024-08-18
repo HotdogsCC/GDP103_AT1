@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class ButtonEnlarge : MonoBehaviour
 {
+    //target sizes when not hovered
     [SerializeField] private float normalX = 393.5f;
     [SerializeField] private float normalY = 125.1f;
     private RectTransform _transform;
@@ -17,6 +18,7 @@ public class ButtonEnlarge : MonoBehaviour
     }
     private void Update()
     {
+        // lerps towards target dimensions, bigger when hovered and smaller when not
         if (pressed)
         {
             _transform.sizeDelta = Vector2.Lerp(_transform.sizeDelta, new Vector2(normalX + 50, normalY + 20), 5 * Time.deltaTime);
@@ -27,6 +29,7 @@ public class ButtonEnlarge : MonoBehaviour
         }
     }
 
+    //public functions called by the event manager on the buttons
     public void Enlarge()
     {
         pressed = true;

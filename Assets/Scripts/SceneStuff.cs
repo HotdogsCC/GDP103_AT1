@@ -6,12 +6,13 @@ using UnityEngine.SceneManagement;
 public class SceneStuff : MonoBehaviour
 {
     [SerializeField] Animator animator;
+
     public void StartGame()
     {
         Cursor.lockState = CursorLockMode.Locked;
         if(animator != null )
         {
-            animator.SetTrigger("Start");
+            animator.SetTrigger("Start"); //plays the loading screen animation
         }
         StartCoroutine(WaitAMo());
     }
@@ -21,6 +22,8 @@ public class SceneStuff : MonoBehaviour
         Application.Quit();
         Debug.Log("game closed");
     }
+    
+    //starts loading screen after animation has begun playing
 
     IEnumerator WaitAMo()
     {

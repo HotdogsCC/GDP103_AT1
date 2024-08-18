@@ -22,6 +22,7 @@ public class PauseManager : MonoBehaviour
             //Pauses game
             if (Input.GetKeyDown(KeyCode.Escape) && FindObjectOfType<TerminalGame>().gameStarted == false)
             {
+                //freezes the player, frees the camera to move, shows UI elements, hides target objective
                 player.enabled = false;
                 Camera.main.GetComponent<CinemachineBrain>().enabled = false;
                 gamePaused = true;
@@ -34,6 +35,7 @@ public class PauseManager : MonoBehaviour
         }
         else
         {
+            //moves camera towards pause target position
             Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, targetPos.position, Time.deltaTime * 5);
             Camera.main.transform.rotation = Quaternion.Lerp(Camera.main.transform.rotation, targetPos.rotation, Time.deltaTime * 5);
             if (Input.GetKeyDown(KeyCode.Escape))
@@ -45,6 +47,7 @@ public class PauseManager : MonoBehaviour
 
     public void Resume()
     {
+        //locks camera back into player, enables player control, hides pause ui
         player.enabled = true;
         Camera.main.GetComponent<CinemachineBrain>().enabled = true;
         gamePaused = false;
